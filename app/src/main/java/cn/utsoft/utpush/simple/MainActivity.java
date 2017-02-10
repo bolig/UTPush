@@ -1,5 +1,6 @@
 package cn.utsoft.utpush.simple;
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -272,9 +273,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_sound_vibrate:
-                UTPushManager.getPushSetting().setRemindType(this,3);
+                /*UTPushManager.getPushSetting().setRemindType(this,3);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+*/
 
+                Notification.Builder builder =new Notification.Builder(this);
+                builder.setDefaults(Notification.DEFAULT_SOUND);
                 break;
 
             default:
