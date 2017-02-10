@@ -231,7 +231,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // 查询设备别名
             case R.id.listAliases:
+                UTPushManager.getPushSetting().listAliases(new ICommomCallback() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.i(TAG, "listAliases"+response);
 
+                    }
+
+                    @Override
+                    public void onFailed(String errorCode, String errorMessage) {
+                        Log.i(TAG, "listAliases" + errorMessage);
+                    }
+                });
                 break;
             // 添加设备别名
             case R.id.addAlias:
@@ -256,6 +267,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // 删除设备别名
             case R.id.removeAlias:
+//                alias 别名（alias = null or alias.length = 0时，删除设备全部别名）
+                UTPushManager.getPushSetting().removeAlias(aliasStr, new ICommomCallback() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.i(TAG, "delAliasSuccess");
+                    }
+
+                    @Override
+                    public void onFailed(String errorCode, String errorMessage) {
+                        Log.i(TAG, "delAliasFailed" + errorMessage);
+
+                    }
+                });
                 break;
 
             case R.id.btn_silent:

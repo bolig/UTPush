@@ -207,13 +207,13 @@ public class UTPushSetting implements IPushSetting {
         PushServiceFactory.getCloudPushService().listAliases(new CommonCallback() {
             @Override
             public void onSuccess(String response) {
-                Log.i(SETTINGS_ACT, "解绑别名标签成功，标签：" + response);
+                Log.i(SETTINGS_ACT, "listAliases" + response);
                 callback.onSuccess(response);
             }
 
             @Override
             public void onFailed(String errorCode, String errorMessage) {
-                Log.e(SETTINGS_ACT, "查询设备别名失败，errorCode: " + errorCode + ", errorMessage：" + errorMessage);
+                Log.e(SETTINGS_ACT, "listAliases，errorCode: " + errorCode + ", errorMessage：" + errorMessage);
                 callback.onFailed(errorCode, errorMessage);
             }
         });
