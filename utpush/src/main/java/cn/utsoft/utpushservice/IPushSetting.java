@@ -1,5 +1,6 @@
 package cn.utsoft.utpushservice;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 /**
@@ -50,6 +51,8 @@ public interface IPushSetting {
     void clearTips();
 
     void setRemindType(int type);
+
+    void setRemindType(Context context, int type);
 
     int getRemindType();
 }

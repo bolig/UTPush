@@ -85,7 +85,7 @@
         </service>
 
         <!--消息接收监听器-->
-        <receiver android:name="com.alibaba.sdk.android.push.MessageReceiver">
+        <receiver android:name="cn.utsoft.utpushservice.AliPushReceiver">
             <intent-filter>
                 <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
             </intent-filter>

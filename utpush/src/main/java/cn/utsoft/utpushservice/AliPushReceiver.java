@@ -8,6 +8,8 @@ import com.alibaba.sdk.android.push.notification.CPushMessage;
 
 import java.util.Map;
 
+import cn.utsoft.utpushservice.manager.BeepManager;
+
 /**
  * Created by 李波 on 2017/2/7.
  * Function:
@@ -30,7 +32,7 @@ public class AliPushReceiver extends MessageReceiver {
 
         String content = cPushMessage.getContent();
         Log.d(TAG, "消息:" + content + "; extraMap:");
-
+        BeepManager.getInstance(context).playBeepSoundAndVibrate();
     }
     /**
      * 通知回调
@@ -42,6 +44,7 @@ public class AliPushReceiver extends MessageReceiver {
     @Override
     protected void onNotification(Context context, String title, String summary, Map<String, String> map) {
         super.onNotification(context, title, summary, map);
+        Log.d(TAG, "title" + title + "\nsummary" + summary + "\nmap" + map.toString());
     }
     /**
      * 通知打开回调

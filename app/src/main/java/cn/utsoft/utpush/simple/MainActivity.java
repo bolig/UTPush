@@ -258,21 +258,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_silent:
-                UTPushManager.getPushSetting().setRemindType(0);
+                UTPushManager.getPushSetting().setRemindType(this,0);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
                 break;
             case R.id.btn_vibrate:
-                UTPushManager.getPushSetting().setRemindType(1);
+                UTPushManager.getPushSetting().setRemindType(this,2);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
 
                 break;
             case R.id.btn_sound:
-                UTPushManager.getPushSetting().setRemindType(2);
+                UTPushManager.getPushSetting().setRemindType(this,1);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
 
                 break;
             case R.id.btn_sound_vibrate:
-                UTPushManager.getPushSetting().setRemindType(3);
+                UTPushManager.getPushSetting().setRemindType(this,3);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
 
                 break;
