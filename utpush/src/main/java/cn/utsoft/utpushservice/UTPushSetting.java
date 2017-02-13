@@ -49,6 +49,11 @@ public class UTPushSetting implements IPushSetting {
 
     }
 
+    /**
+     * 绑定账户
+     * @param acountStr
+     * @param callback
+     */
     @Override
     public void bindAccount(final String acountStr, final ICommomCallback callback) {
         if (!TextUtils.isEmpty(acountStr)) {
@@ -94,7 +99,7 @@ public class UTPushSetting implements IPushSetting {
     /**
      * @param type     1、绑定标签到设备 2、绑定标签到账号 3、绑定标签到别名
      * @param tags     标签集合
-     * @param alias    别名，仅当var1等于3时有效，可以为null
+     * @param alias    别名，仅当type等于3时有效，可以为null
      * @param callback
      */
     @Override
@@ -115,9 +120,9 @@ public class UTPushSetting implements IPushSetting {
     }
 
     /**
-     * @param type     1、绑定标签到设备 2、绑定标签到账号 3、绑定标签到别名
+     * @param type     1、解除绑定标签到设备 2、绑定标签到账号 3、绑定标签到别名
      * @param tags     标签集合
-     * @param alias    别名，仅当var1等于3时有效，可以为null
+     * @param alias    别名，仅当type等于3时有效，可以为null
      * @param callback
      */
 
@@ -301,9 +306,9 @@ public class UTPushSetting implements IPushSetting {
      */
     @Override
     public void setRemindType(int type) {
-        notification.setRemindType(BasicCustomPushNotification.REMIND_TYPE_SOUND);
+        notification.setRemindType(type);
         this.notificationType = type;
-//        notification.setStatusBarDrawable(R.drawable.logo_yuanjiao_120);//设置状态栏图标
+        notification.setStatusBarDrawable(android.R.drawable.ic_menu_call);//设置状态栏图标
         boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(1, notification);//注册该通知,并设置ID为1
     }
 

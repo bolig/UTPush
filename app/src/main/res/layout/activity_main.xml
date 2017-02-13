@@ -2,240 +2,291 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-            android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="com.alibaba.cloudpushdemo.bizactivity.SettingsActivity">
 
             <EditText
+                android:id="@+id/userAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/userAccount"
-                android:hint="@string/inputplease"
-                android:maxLines="1"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:hint="@string/inputplease"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/bindAccount"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_bindaccount"
-                android:id="@+id/bindAccount"
                 android:layout_below="@+id/userAccount"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_weight="1"
+                android:text="@string/settings_bindaccount" />
 
             <Button
+                android:id="@+id/unbindAccount"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_unbindaccount"
-                android:id="@+id/unbindAccount"
-                android:layout_below="@+id/bindAccount"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/bindAccount"
+                android:text="@string/settings_unbindaccount" />
 
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/inputAlias"
-                android:maxLines="1"
-                android:hint="@string/settings_inputAlias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/unbindAccount"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:hint="@string/settings_inputAlias"
+                android:maxLines="1" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_addAlias"
                 android:id="@+id/addAlias"
-                android:layout_below="@+id/inputAlias"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_removeAlias"
-                android:id="@+id/removeAlias"
-                android:layout_below="@+id/addAlias"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/inputAlias"
+                android:text="@string/settings_addAlias" />
+
+            <Button
+                android:id="@+id/removeAlias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/addAlias"
+                android:text="@string/settings_removeAlias" />
 
             <!-- 我是分隔线~ -->
             <TextView
-                android:height="1dip"
+                android:id="@+id/aline"
                 android:layout_width="wrap_content"
                 android:layout_height="1dip"
-                android:background="#FFFFFFFF"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/aline"
-                android:layout_below="@+id/removeAlias"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/removeAlias"
+                android:layout_marginTop="8dp"
+                android:height="1dip"
+                android:background="#FFFFFFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/inputTags"
-                android:hint="@string/inputlabelplease"
-                android:maxLines="1"
-                android:layout_below="@+id/aline"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/aline"
+                android:layout_marginTop="5dp"
+                android:hint="@string/inputlabelplease"
+                android:maxLines="1" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_bindTagToDev"
                 android:id="@+id/bindTagToDev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/inputTags"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_bindTagToDev" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_unbindTagFromDev"
                 android:id="@+id/unbindTagFromDev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/bindTagToDev"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_unbindTagFromDev" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_bindTagToAccount"
                 android:id="@+id/bindTagToAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/unbindTagFromDev"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_bindTagToAccount" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_unbindTagFromAccount"
                 android:id="@+id/unbindTagFromAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/bindTagToAccount"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_unbindTagFromAccount" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_bindTagToAlias"
                 android:id="@+id/bindTagToAlias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/unbindTagFromAccount"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_bindTagToAlias" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_unbindTagFromAlias"
                 android:id="@+id/unbindTagFromAlias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/bindTagToAlias"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:text="@string/settings_unbindTagFromAlias" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_listTags"
                 android:id="@+id/listTags"
-                android:layout_below="@+id/unbindTagFromAlias"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_listAliases"
-                android:id="@+id/listAliases"
-                android:layout_below="@+id/listTags"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/unbindTagFromAlias"
+                android:text="@string/settings_listTags" />
+
+            <Button
+                android:id="@+id/listAliases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/listTags"
+                android:text="@string/settings_listAliases" />
+
             <Button
                 android:id="@+id/btn_silent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="通知免打扰"
-                android:layout_below="@+id/listAliases"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/listAliases"
+                android:text="消息免打扰" />
+
             <Button
                 android:id="@+id/btn_vibrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="关闭声音"
-                android:layout_below="@+id/btn_silent"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_silent"
+                android:text="关闭消息声音" />
+
             <Button
                 android:id="@+id/btn_sound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="关闭震动"
-                android:layout_below="@+id/btn_vibrate"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_vibrate"
+                android:text="关闭消息震动" />
+
             <Button
                 android:id="@+id/btn_sound_vibrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="开启声音震动"
-                android:layout_below="@+id/btn_sound"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_sound"
+                android:text="开启消息声音震动" />
+
+            <Button
+                android:id="@+id/btn_silent_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_sound_vibrate"
+                android:text="通知免打扰" />
+
+            <Button
+                android:id="@+id/btn_sound_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_silent_notifi"
+                android:text="关闭通知震动" />
+
+            <Button
+                android:id="@+id/btn_vibrate_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_sound_notifi"
+                android:text="关闭通知声音" />
+
+            <Button
+                android:id="@+id/btn_sound_vibrate_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btn_vibrate_notifi"
+                android:text="开启通知声音震动" />
 
         </RelativeLayout>
     </LinearLayout>

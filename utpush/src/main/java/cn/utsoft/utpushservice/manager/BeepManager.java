@@ -104,7 +104,6 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
 
     /**
      * 刷新数据
-     *
      * @param activity
      * @param res
      */
@@ -177,7 +176,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
      * @return
      */
     private static boolean shouldBeep(SharedPreferences prefs, Context context) {
-        boolean shouldPlayBeep = prefs.getBoolean(KEY_PLAY_BEEP, true);
+        boolean shouldPlayBeep = prefs.getBoolean(KEY_PLAY_BEEP, false);
         if (shouldPlayBeep) {
             // See if sound settings overrides this
             AudioManager audioService = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);

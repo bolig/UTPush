@@ -32,6 +32,7 @@ public class AliPushReceiver extends MessageReceiver {
 
         String content = cPushMessage.getContent();
         Log.d(TAG, "消息:" + content + "; extraMap:");
+
         BeepManager.getInstance(context).playBeepSoundAndVibrate();
     }
     /**

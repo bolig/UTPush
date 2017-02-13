@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button vibrate;
     Button sound;
     Button soundVibrate;
+    Button silentNotifi;
+    Button vibrateNotifi;
+    Button soundNotifi;
+    Button soundVibrateNotifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vibrate = (Button) this.findViewById(R.id.btn_vibrate);
         sound = (Button) this.findViewById(R.id.btn_sound);
         soundVibrate = (Button) this.findViewById(R.id.btn_sound_vibrate);
+        silentNotifi = (Button) this.findViewById(R.id.btn_silent_notifi);
+        vibrateNotifi = (Button) this.findViewById(R.id.btn_vibrate_notifi);
+        soundNotifi= (Button) this.findViewById(R.id.btn_sound_notifi);
+        soundVibrateNotifi = (Button) this.findViewById(R.id.btn_sound_vibrate_notifi);
 
         bindAccount.setOnClickListener(this);
         unbindAccount.setOnClickListener(this);
@@ -73,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vibrate.setOnClickListener(this);
         sound.setOnClickListener(this);
         soundVibrate.setOnClickListener(this);
+        silentNotifi.setOnClickListener(this);
+        vibrateNotifi.setOnClickListener(this);
+        soundNotifi.setOnClickListener(this);
+        soundVibrateNotifi.setOnClickListener(this);
     }
 
 
@@ -257,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.removeAlias:
                 break;
 
+            //消息相关
             case R.id.btn_silent:
                 UTPushManager.getPushSetting().setRemindType(this,0);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
@@ -274,8 +287,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_sound_vibrate:
                 UTPushManager.getPushSetting().setRemindType(this,3);
                 Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
-
                 break;
+
+//            //通知相关
+//            case R.id.btn_silent_notifi:
+//                UTPushManager.getPushSetting().setRemindType(0);
+//                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+//                break;
+//            case R.id.btn_sound_notifi:
+//                UTPushManager.getPushSetting().setRemindType(2);
+//                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+//                break;
+//            case R.id.btn_vibrate_notifi:
+//                UTPushManager.getPushSetting().setRemindType(1);
+//                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+//                break;
+//            case R.id.btn_sound_vibrate_notifi:
+//                UTPushManager.getPushSetting().setRemindType(3);
+//                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+//                break;
+
 
             default:
                 break;
