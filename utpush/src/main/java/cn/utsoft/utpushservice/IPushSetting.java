@@ -55,4 +55,11 @@ public interface IPushSetting {
     void setRemindType(Context context, int type);
 
     int getRemindType();
+
+    boolean customNofication(int remindType,int drawableRes);
+
+    boolean customNofication(int layout,int iconID,int titleID,int textID);
+
+
+
 }

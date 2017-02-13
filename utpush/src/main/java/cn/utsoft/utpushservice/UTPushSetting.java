@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
+import com.alibaba.sdk.android.push.notification.AdvancedCustomPushNotification;
 import com.alibaba.sdk.android.push.notification.BasicCustomPushNotification;
 import com.alibaba.sdk.android.push.notification.CustomNotificationBuilder;
 
@@ -341,6 +342,31 @@ public class UTPushSetting implements IPushSetting {
         else {
             return TYPE_SOUND_VIBRATE;
         }
+    }
+    /**
+     * diy通知类型1
+     * */
+    @Override
+    public boolean customNofication(int remindType,int statusDrawable) {
+        BasicCustomPushNotification notification = new BasicCustomPushNotification();
+        notification.setRemindType(remindType);//设置提醒方式为声音
+        notification.setStatusBarDrawable(statusDrawable);//设置状态栏图标
+        boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(001, notification);//注册该通知,并设置ID为1
+
+        return res;
+    }
+
+    /**
+     * diy通知类型2
+     * */
+    @Override
+    public boolean customNofication(int layout, int iconID, int titleID, int textID) {
+        AdvancedCustomPushNotification notification = new AdvancedCustomPushNotification(layout,iconID,titleID, textID);//创建高级自定义样式通知,设置布局文件以及对应的控件ID
+        notification.setServerOptionFirst(true);//设置服务端配置优先
+        notification.setBuildWhenAppInForeground(false);//设置当推送到达时如果应用处于前台不创建通知
+        boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(002, notification);//注册该通知,并设置ID为2
+        PushServiceFactory.getCloudPushService().clearNotifications();
+        return res;
     }
 
 

@@ -1,6 +1,7 @@
 package cn.utsoft.utpush.simple;
 
 import android.app.Notification;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,12 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
+import com.alibaba.sdk.android.push.notification.BasicCustomPushNotification;
+import com.alibaba.sdk.android.push.notification.CustomNotificationBuilder;
+import com.taobao.accs.client.c;
+
 import cn.utsoft.utpushservice.ICommomCallback;
 import cn.utsoft.utpushservice.manager.UTPushManager;
 
+import static com.taobao.accs.client.c.b;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    final String TAG = getClass().getSimpleName();
+    final String info = getClass().getSimpleName();
 
     String acountStr;
     String tagStr;
@@ -36,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button vibrate;
     Button sound;
     Button soundVibrate;
+    Button settingMusic;
+    Button deviceID;
+    Button diyNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +66,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listTags = (Button) this.findViewById(R.id.listTags);
         listAliases = (Button) this.findViewById(R.id.listAliases);
         silent = (Button) this.findViewById(R.id.btn_silent);
-        vibrate = (Button) this.findViewById(R.id.btn_vibrate);
-        sound = (Button) this.findViewById(R.id.btn_sound);
-        soundVibrate = (Button) this.findViewById(R.id.btn_sound_vibrate);
+        settingMusic = (Button) this.findViewById(R.id.setting_music);
+        deviceID = (Button) this.findViewById(R.id.btn_deviceid);
+        diyNotification = (Button) this.findViewById(R.id.btn_diyNotification);
 
+        diyNotification.setOnClickListener(this);
+        deviceID.setOnClickListener(this);
+        settingMusic.setOnClickListener(this);
         bindAccount.setOnClickListener(this);
         unbindAccount.setOnClickListener(this);
         addAlias.setOnClickListener(this);
@@ -71,15 +86,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listTags.setOnClickListener(this);
         listAliases.setOnClickListener(this);
         silent.setOnClickListener(this);
-        vibrate.setOnClickListener(this);
-        sound.setOnClickListener(this);
-        soundVibrate.setOnClickListener(this);
+
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.setting_music:
+                Intent intent = new Intent(this, SecendSettingActivity.class);
+                startActivity(intent);
+                break;
             // 绑定账号
             case R.id.bindAccount:
                 acountStr = ((EditText) this.findViewById(R.id.userAccount)).getText().toString().trim();
@@ -87,12 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     UTPushManager.getPushSetting().bindAccount(acountStr, new ICommomCallback() {
                         @Override
                         public void onSuccess(String response) {
-                            Log.i(TAG, "bindSuccess");
+                            Log.i(info, "bindSuccess");
                         }
 
                         @Override
                         public void onFailed(String errorCode, String errorMessage) {
-                            Log.i(TAG, "bindFailed" + errorMessage);
+                            Log.i(info, "bindFailed" + errorMessage);
 
                         }
                     });
@@ -106,13 +123,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindAccount(new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "unBindSuccess");
-
+                        Log.i(info, "unBindSuccess");
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "unBindFailed" + errorMessage);
+                        Log.i(info, "unBindFailed" + errorMessage);
 
                     }
                 });
@@ -122,13 +138,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(1, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "bindTagSuccess");
+                        Log.i(info, "bindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "bindTagFailed" + errorMessage);
+                        Log.i(info, "bindTagFailed" + errorMessage);
 
                     }
                 });
@@ -138,13 +154,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(1, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "unBindTagSuccess");
+                        Log.i(info, "unBindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "unBindTagFailed" + errorMessage);
+                        Log.i(info, "unBindTagFailed" + errorMessage);
 
                     }
                 });
@@ -154,13 +170,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(2, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "bindTagSuccess");
+                        Log.i(info, "bindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "bindTagFailed" + errorMessage);
+                        Log.i(info, "bindTagFailed" + errorMessage);
 
                     }
                 });
@@ -170,13 +186,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(2, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "unBindTagSuccess");
+                        Log.i(info, "unBindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "unBindTagFailed" + errorMessage);
+                        Log.i(info, "unBindTagFailed" + errorMessage);
 
                     }
                 });
@@ -186,13 +202,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(3, new String[]{"标签1", "标签2"}, "alias", new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "bindTagSuccess");
+                        Log.i(info, "bindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "bindTagFailed" + errorMessage);
+                        Log.i(info, "bindTagFailed" + errorMessage);
 
                     }
                 });
@@ -202,13 +218,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(3, new String[]{"标签1", "标签2"}, "alias", new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "unbindTagSuccess");
+                        Log.i(info, "unbindTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "unbindTagFailed" + errorMessage);
+                        Log.i(info, "unbindTagFailed" + errorMessage);
 
                     }
                 });
@@ -218,13 +234,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().listTags(1, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "listTagSuccess");
+                        Log.i(info, "listTagSuccess");
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "listTagFailed" + errorMessage);
+                        Log.i(info, "listTagFailed" + errorMessage);
 
                     }
                 });
@@ -234,13 +250,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().listAliases(new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "listAliases"+response);
+                        Log.i(info, "listAliases" + response);
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "listAliases" + errorMessage);
+                        Log.i(info, "listAliases" + errorMessage);
                     }
                 });
                 break;
@@ -251,13 +267,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     UTPushManager.getPushSetting().addAlias(aliasStr, new ICommomCallback() {
                         @Override
                         public void onSuccess(String response) {
-                            Log.i(TAG, "addAliasSuccess");
+                            Log.i(info, "addAliasSuccess");
 
                         }
 
                         @Override
                         public void onFailed(String errorCode, String errorMessage) {
-                            Log.i(TAG, "addAliasFailed" + errorMessage);
+                            Log.i(info, "addAliasFailed" + errorMessage);
 
                         }
                     });
@@ -271,41 +287,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().removeAlias(aliasStr, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(TAG, "delAliasSuccess");
+                        Log.i(info, "delAliasSuccess");
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(TAG, "delAliasFailed" + errorMessage);
-
+                        Log.i(info, "delAliasFailed" + errorMessage);
                     }
                 });
                 break;
 
             case R.id.btn_silent:
-                UTPushManager.getPushSetting().setRemindType(this,0);
-                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
-                break;
-            case R.id.btn_vibrate:
-                UTPushManager.getPushSetting().setRemindType(this,2);
-                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
-
-                break;
-            case R.id.btn_sound:
-                UTPushManager.getPushSetting().setRemindType(this,1);
-                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
-
-                break;
-            case R.id.btn_sound_vibrate:
-                /*UTPushManager.getPushSetting().setRemindType(this,3);
-                Log.i(TAG, "remaindType" + UTPushManager.getPushSetting().getRemindType());
-*/
-
-                Notification.Builder builder =new Notification.Builder(this);
-                builder.setDefaults(Notification.DEFAULT_SOUND);
+                UTPushManager.getPushSetting().setRemindType(this, 0);
+                Log.i(info, "remaindType" + UTPushManager.getPushSetting().getRemindType());
                 break;
 
-            default:
+
+            case R.id.btn_deviceid:
+                String deviceId = UTPushManager.getPushSetting().getDeviceId();
+                Toast.makeText(this, ""+deviceId, Toast.LENGTH_SHORT).show();
+                break;
+            case  R.id.btn_diyNotification:
+              /*  boolean b = UTPushManager.getPushSetting().customNofication(BasicCustomPushNotification.REMIND_TYPE_SOUND, R.mipmap.logo_yuanjiao_120);*/
+                boolean b = UTPushManager.getPushSetting().customNofication(R.layout.layout_diycontent, R.id.imageView, R.id.textView, R.id.textView2);
+                Toast.makeText(this, "ddddddddddd===="+ b, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
