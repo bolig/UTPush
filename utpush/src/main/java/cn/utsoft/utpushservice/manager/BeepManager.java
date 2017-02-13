@@ -143,7 +143,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
     public void playBeepSoundAndVibrate() {
         this.playBeepSoundAndVibrate(null, -1);
     }
-
+            
     /**
      * 执行操作
      */
