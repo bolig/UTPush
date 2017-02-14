@@ -95,7 +95,7 @@ public class UTPushSetting implements IPushSetting {
         if (tags.length == 0) {
             throw new RuntimeException("add tags");
         }
-        if (type != 1 && type != 2 && type != 3) {
+        if (type != 1 || type != 2 || type != 3) {
             throw new RuntimeException("type类型错误");
         }
         if (type == 3 && alias == null) {
@@ -128,7 +128,7 @@ public class UTPushSetting implements IPushSetting {
         if (tags.length == 0) {
             throw new RuntimeException("add tags");
         }
-        if (type != 1 && type != 2 && type != 3) {
+        if (type != 1 || type != 2 || type != 3) {
             throw new RuntimeException("type类型错误");
         }
         if (type == 3 && alias == null) {
@@ -263,6 +263,7 @@ public class UTPushSetting implements IPushSetting {
      * @param endMinute   免打扰结束时间（分钟），取值范围：0-59
      * @param callback
      */
+
     @Override
     public void setDoNotDisturb(int startHour, int startMinute, int endHour, int endMinute, final ICommomCallback callback) {
         if (!isTimeError(startHour, startMinute, endHour, endMinute)) {
@@ -334,7 +335,7 @@ public class UTPushSetting implements IPushSetting {
 
     @Override
     public void setMsgRemindType(Context context, int type) {
-        if (type != 0 && type != 1 && type != 2 && type != 3) {
+        if (type != 0 || type != 1 || type != 2 || type != 3) {
             throw new RuntimeException("type类型错误");
         }
         switch (type) {
@@ -392,7 +393,7 @@ public class UTPushSetting implements IPushSetting {
      */
     @Override
     public boolean customNofication(int remindType, int statusDrawable) {
-        if (remindType != 0 && remindType != 1 && remindType != 2 && remindType != 3) {
+        if (remindType != 0 || remindType != 1 || remindType != 2 || remindType != 3) {
             throw new RuntimeException("type类型错误");
         }
         BasicCustomPushNotification notification = new BasicCustomPushNotification();
@@ -415,6 +416,10 @@ public class UTPushSetting implements IPushSetting {
     public boolean customNofication(int layout, int iconID, int titleID, int textID, int remindType) {
         if (layout < 0 || iconID < 0 || titleID < 0 || textID < 0) {
             throw new RuntimeException("请填入正确资源id");
+        }
+
+        if (remindType != 0 || remindType != 1 || remindType != 2 || remindType != 3) {
+            throw new RuntimeException("type类型错误");
         }
         //创建高级自定义样式通知,设置布局文件以及对应的控件ID
         AdvancedCustomPushNotification notification = new AdvancedCustomPushNotification(layout, iconID, titleID, textID);
