@@ -1,25 +1,15 @@
 package cn.utsoft.utpush.simple;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.push.CloudPushService;
-import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.alibaba.sdk.android.push.notification.BasicCustomPushNotification;
-import com.alibaba.sdk.android.push.notification.CustomNotificationBuilder;
-import com.taobao.accs.client.c;
-
 import cn.utsoft.utpushservice.ICommomCallback;
 import cn.utsoft.utpushservice.manager.UTPushManager;
-
-import static com.taobao.accs.client.c.b;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button settingMusic;
     Button deviceID;
     Button diyNotification;
+    Button btnMsg;
+    private int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settingMusic = (Button) this.findViewById(R.id.setting_music);
         deviceID = (Button) this.findViewById(R.id.btn_deviceid);
         diyNotification = (Button) this.findViewById(R.id.btn_diyNotification);
+        btnMsg = (Button) findViewById(R.id.btn_msg);
 
         diyNotification.setOnClickListener(this);
         deviceID.setOnClickListener(this);
@@ -86,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listTags.setOnClickListener(this);
         listAliases.setOnClickListener(this);
         silent.setOnClickListener(this);
+        btnMsg.setOnClickListener(this);
 
     }
 
@@ -104,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     UTPushManager.getPushSetting().bindAccount(acountStr, new ICommomCallback() {
                         @Override
                         public void onSuccess(String response) {
-                            Log.i(info, "bindSuccess");
+                            Toast.makeText(MainActivity.this, "bindSuccess", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailed(String errorCode, String errorMessage) {
-                            Log.i(info, "bindFailed" + errorMessage);
+                            Toast.makeText(MainActivity.this, "bindFailed", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -123,12 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindAccount(new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "unBindSuccess");
+                        Toast.makeText(MainActivity.this, "unBindSuccess", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "unBindFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "unBindFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -138,13 +133,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(1, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "bindTagSuccess");
+                        Toast.makeText(MainActivity.this, "bindTagSuccess", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "bindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "bindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -154,13 +149,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(1, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "unBindTagSuccess");
+                        Toast.makeText(MainActivity.this, "unBindTagSuccess", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "unBindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "unBindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -170,13 +165,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(2, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "bindTagSuccess");
+                        Toast.makeText(MainActivity.this, "bindTagSuccess", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "bindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "bindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -186,13 +181,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(2, new String[]{"标签1", "标签2"}, null, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "unBindTagSuccess");
+                        Toast.makeText(MainActivity.this, "unBindTagSuccess", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "unBindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "unBindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -202,13 +197,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().bindTag(3, new String[]{"标签1", "标签2"}, "alias", new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "bindTagSuccess");
-
+                        Toast.makeText(MainActivity.this, "bindTagSuccess", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "bindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "bindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -218,13 +212,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().unbindTag(3, new String[]{"标签1", "标签2"}, "alias", new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "unbindTagSuccess");
+                        Toast.makeText(MainActivity.this, "unbindTagSuccess", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "unbindTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "unbindTagFailed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -234,13 +228,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().listTags(1, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "listTagSuccess");
+                        Toast.makeText(MainActivity.this, "listTagSuccess-->" + response, Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "listTagFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "listTagFailed" + errorMessage, Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -250,13 +244,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().listAliases(new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "listAliases" + response);
+                        Toast.makeText(MainActivity.this, "listAliases" + response, Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "listAliases" + errorMessage);
+                        Toast.makeText(MainActivity.this, "listAliases" + errorMessage, Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 break;
@@ -267,13 +262,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     UTPushManager.getPushSetting().addAlias(aliasStr, new ICommomCallback() {
                         @Override
                         public void onSuccess(String response) {
-                            Log.i(info, "addAliasSuccess");
+                            Toast.makeText(MainActivity.this, "addAliasSuccess-->" + response, Toast.LENGTH_SHORT).show();
 
                         }
 
                         @Override
                         public void onFailed(String errorCode, String errorMessage) {
-                            Log.i(info, "addAliasFailed" + errorMessage);
+                            Toast.makeText(MainActivity.this, "addAliasFailed" + errorMessage, Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -287,30 +282,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UTPushManager.getPushSetting().removeAlias(aliasStr, new ICommomCallback() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.i(info, "delAliasSuccess");
+                        Toast.makeText(MainActivity.this, "delAliasSuccess", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onFailed(String errorCode, String errorMessage) {
-                        Log.i(info, "delAliasFailed" + errorMessage);
+                        Toast.makeText(MainActivity.this, "delAliasFailed" + errorMessage, Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 break;
 
             case R.id.btn_silent:
-                UTPushManager.getPushSetting().setRemindType(this, 0);
-                Log.i(info, "remaindType" + UTPushManager.getPushSetting().getRemindType());
+                UTPushManager.getPushSetting().setDoNotDisturb(22, 0, 8, 59, new ICommomCallback() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Toast.makeText(MainActivity.this, "setDoNotDisturbSuccess" + response, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailed(String errorCode, String errorMessage) {
+                        Toast.makeText(MainActivity.this, "setDoNotDisturbSuccess" + errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 
 
             case R.id.btn_deviceid:
                 String deviceId = UTPushManager.getPushSetting().getDeviceId();
-                Toast.makeText(this, ""+deviceId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "" + deviceId, Toast.LENGTH_SHORT).show();
                 break;
-            case  R.id.btn_diyNotification:
+            case R.id.btn_diyNotification:
               /*  boolean b = UTPushManager.getPushSetting().customNofication(BasicCustomPushNotification.REMIND_TYPE_SOUND, R.mipmap.logo_yuanjiao_120);*/
-                boolean b = UTPushManager.getPushSetting().customNofication(R.layout.layout_diycontent, R.id.imageView, R.id.textView, R.id.textView2);
-                Toast.makeText(this, "ddddddddddd===="+ b, Toast.LENGTH_SHORT).show();
+                boolean b = UTPushManager.getPushSetting().customNofication(R.layout.layout_diycontent, R.id.imageView, R.id.textView, R.id.textView2, 1);
+                Toast.makeText(this, "ddddddddddd====" + b, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_msg:
+                Toast.makeText(this, "i=" + UTPushManager.getPushSetting().getMsgRemindType(), Toast.LENGTH_SHORT).show();
+                UTPushManager.getPushSetting().setMsgRemindType(this, i % 4);
+                i++;
                 break;
         }
     }

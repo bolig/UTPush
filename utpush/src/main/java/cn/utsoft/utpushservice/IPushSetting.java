@@ -5,14 +5,11 @@ import android.graphics.Bitmap;
 
 /**
  * Created by LiLi on 2017/2/8.
- * Func:
+ * Func:推送功能管理接口
  * Desc:
  */
 
 public interface IPushSetting {
-//    void register(Context var1, ICommomCallback var2);
-//
-//    void register(Context var1, String var2, String var3, ICommomCallback var4);
 
     void onAppStart();
 
@@ -50,15 +47,15 @@ public interface IPushSetting {
 
     void clearTips();
 
-    void setRemindType(int type);
+    void setMsgRemindType(Context context, int type);
 
-    void setRemindType(Context context, int type);
+    int getMsgRemindType();
 
-    int getRemindType();
+    int getNotificationRemindType();
 
     boolean customNofication(int remindType,int drawableRes);
 
-    boolean customNofication(int layout,int iconID,int titleID,int textID);
+    boolean customNofication(int layout,int iconID,int titleID,int textID,int remindType);
 
 
 
