@@ -292,7 +292,6 @@ public class UTPushSetting implements IPushSetting {
     @Override
     public void clearTips() {
         PushServiceFactory.getCloudPushService().clearNotifications();
-
     }
 
     /**

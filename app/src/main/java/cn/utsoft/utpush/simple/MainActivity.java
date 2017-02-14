@@ -1,6 +1,5 @@
 package cn.utsoft.utpush.simple;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.push.CloudPushService;
-import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.alibaba.sdk.android.push.notification.BasicCustomPushNotification;
-import com.alibaba.sdk.android.push.notification.CustomNotificationBuilder;
-import com.taobao.accs.client.c;
 
 import cn.utsoft.utpushservice.ICommomCallback;
 import cn.utsoft.utpushservice.manager.UTPushManager;
 
-import static com.taobao.accs.client.c.b;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

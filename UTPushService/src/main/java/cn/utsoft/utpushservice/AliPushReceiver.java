@@ -33,5 +33,4 @@ public class AliPushReceiver extends MessageReceiver {
         BeepManager.getInstance(context).playBeepSoundAndVibrate();
         Log.i(TAG, "onMessage: "+context.getPackageName());
     }
-
 }

@@ -1,1 +1,1 @@
-include ':app', ':utpush'
+include ':app', ':UTPushService'
