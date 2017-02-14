@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/UTPush.iml" filepath="$PROJECT_DIR$/UTPush.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/newPush.iml" filepath="$PROJECT_DIR$/newPush.iml" />
       <module fileurl="file://$PROJECT_DIR$/utpush/utpush.iml" filepath="$PROJECT_DIR$/utpush/utpush.iml" />

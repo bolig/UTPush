@@ -23,27 +23,17 @@ public class UTPushSetting implements IPushSetting {
     public static final String SETTINGS_ACT = "settings-act";
 
     private static UTPushSetting pushSetting = new UTPushSetting();
-    BasicCustomPushNotification notification = new BasicCustomPushNotification();
 
     private final int TYPE_SILENT = 0;
-    private final int TYPE_SOUND = 1;
-    private final int TYPE_VIBRATE = 2;
+    private final int TYPE_VIBRATE = 1;
+    private final int TYPE_SOUND = 2;
     private final int TYPE_SOUND_VIBRATE = 3;
-    private int notificationType;
+    private int notificationType = 3;
+    private int msgType = 2;
 
     public static UTPushSetting getPushSetting() {
         return pushSetting;
     }
-
-//    @Override
-//    public void register(Context var1, ICommomCallback var2) {
-//
-//    }
-//
-//    @Override
-//    public void register(Context var1, String var2, String var3, ICommomCallback var4) {
-//
-//    }
 
     @Override
     public void onAppStart() {
@@ -68,6 +58,8 @@ public class UTPushSetting implements IPushSetting {
                 }
             });
         } else {
+            throw new RuntimeException("acountStr不能为空");
+
         }
     }
 
@@ -100,6 +92,15 @@ public class UTPushSetting implements IPushSetting {
      */
     @Override
     public void bindTag(int type, String[] tags, String alias, final ICommomCallback callback) {
+        if (tags.length == 0) {
+            throw new RuntimeException("add tags");
+        }
+        if (type != 1 && type != 2 && type != 3) {
+            throw new RuntimeException("type类型错误");
+        }
+        if (type == 3 && alias == null) {
+            throw new RuntimeException("当type=3时alias不能为null");
+        }
         PushServiceFactory.getCloudPushService().bindTag(type, tags, alias, new CommonCallback() {
             @Override
             public void onSuccess(String response) {
@@ -124,6 +125,16 @@ public class UTPushSetting implements IPushSetting {
 
     @Override
     public void unbindTag(int type, String[] tags, String alias, final ICommomCallback callback) {
+        if (tags.length == 0) {
+            throw new RuntimeException("add tags");
+        }
+        if (type != 1 && type != 2 && type != 3) {
+            throw new RuntimeException("type类型错误");
+        }
+        if (type == 3 && alias == null) {
+            throw new RuntimeException("当type=3时alias不能为null");
+        }
+
         PushServiceFactory.getCloudPushService().unbindTag(type, tags, alias, new CommonCallback() {
             @Override
             public void onSuccess(String response) {
@@ -147,6 +158,9 @@ public class UTPushSetting implements IPushSetting {
      */
     @Override
     public void listTags(int type, final ICommomCallback callback) {
+        if (type != 1) {
+            throw new RuntimeException("type类型错误");
+        }
         PushServiceFactory.getCloudPushService().listTags(type, new CommonCallback() {
             @Override
             public void onSuccess(String response) {
@@ -179,6 +193,7 @@ public class UTPushSetting implements IPushSetting {
                 }
             });
         } else {
+            throw new RuntimeException("aliasStr不能为空");
         }
     }
 
@@ -199,6 +214,8 @@ public class UTPushSetting implements IPushSetting {
                 }
             });
         } else {
+            throw new RuntimeException("aliasStr不能为空");
+
         }
 
     }
@@ -248,17 +265,28 @@ public class UTPushSetting implements IPushSetting {
      */
     @Override
     public void setDoNotDisturb(int startHour, int startMinute, int endHour, int endMinute, final ICommomCallback callback) {
-        PushServiceFactory.getCloudPushService().setDoNotDisturb(startHour, startMinute, endHour, endMinute, new CommonCallback() {
-            @Override
-            public void onSuccess(String s) {
-                callback.onSuccess(s);
-            }
+        if (!isTimeError(startHour, startMinute, endHour, endMinute)) {
+            PushServiceFactory.getCloudPushService().setDoNotDisturb(startHour, startMinute, endHour, endMinute, new CommonCallback() {
+                @Override
+                public void onSuccess(String s) {
+                    callback.onSuccess(s);
+                }
 
-            @Override
-            public void onFailed(String s, String s1) {
-                callback.onFailed(s, s1);
-            }
-        });
+                @Override
+                public void onFailed(String s, String s1) {
+                    callback.onFailed(s, s1);
+                }
+            });
+        } else {
+            throw new RuntimeException("请设置正确时间段");
+        }
+    }
+
+    private boolean isTimeError(int startHour, int startMinute, int endHour, int endMinute) {
+        if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 || endHour < 0 || endHour > 23 || endMinute < 0 || endMinute > 59) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -280,59 +308,71 @@ public class UTPushSetting implements IPushSetting {
     }
 
     @Override
-    public void setNotificationLargeIcon(Bitmap var1) {
-        PushServiceFactory.getCloudPushService().setNotificationLargeIcon(var1);
+    public void setNotificationLargeIcon(Bitmap bitmap) {
+        if (bitmap == null) {
+            throw new RuntimeException("bitmap不能为null");
+        }
+        PushServiceFactory.getCloudPushService().setNotificationLargeIcon(bitmap);
     }
 
     @Override
-    public void setNotificationSmallIcon(int var1) {
-        PushServiceFactory.getCloudPushService().setNotificationSmallIcon(var1);
+    public void setNotificationSmallIcon(int res) {
+        PushServiceFactory.getCloudPushService().setNotificationSmallIcon(res);
     }
 
     @Override
     public void clearTips() {
         PushServiceFactory.getCloudPushService().clearNotifications();
-
     }
 
+
     /**
-     * 设置提示方式
+     * 设置消息提示方式
      *
      * @param type 0、无声 1、震动 2、铃声 3、铃声震动
      */
-    @Override
-    public void setRemindType(int type) {
-        notification.setRemindType(BasicCustomPushNotification.REMIND_TYPE_SOUND);
-        this.notificationType = type;
-//        notification.setStatusBarDrawable(R.drawable.logo_yuanjiao_120);//设置状态栏图标
-        boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(1, notification);//注册该通知,并设置ID为1
-    }
 
     @Override
-    public void setRemindType(Context context, int type) {
+    public void setMsgRemindType(Context context, int type) {
+        if (type != 0 && type != 1 && type != 2 && type != 3) {
+            throw new RuntimeException("type类型错误");
+        }
         switch (type) {
-            case TYPE_SILENT:
+            case TYPE_SILENT://免打扰
                 BeepManager.getInstance(context).setMsgSound(context, false);
                 BeepManager.getInstance(context).setVibrate(context, false);
                 break;
-            case TYPE_SOUND:
+            case TYPE_SOUND://铃音
                 BeepManager.getInstance(context).setMsgSound(context, true);
                 BeepManager.getInstance(context).setVibrate(context, false);
                 break;
-            case TYPE_VIBRATE:
+            case TYPE_VIBRATE://震动
                 BeepManager.getInstance(context).setMsgSound(context, false);
                 BeepManager.getInstance(context).setVibrate(context, true);
                 break;
-            case TYPE_SOUND_VIBRATE:
+            case TYPE_SOUND_VIBRATE://铃声震动
                 BeepManager.getInstance(context).setMsgSound(context, true);
                 BeepManager.getInstance(context).setVibrate(context, true);
                 break;
         }
-        this.notificationType = type;
+        this.msgType = type;
     }
 
     @Override
-    public int getRemindType() {
+    public int getMsgRemindType() {
+        if (msgType == TYPE_SILENT)
+            return TYPE_SILENT;
+        else if (notificationType == TYPE_SOUND)
+            return TYPE_SOUND;
+        else if (notificationType == TYPE_VIBRATE)
+            return TYPE_VIBRATE;
+        else {
+            return TYPE_SOUND_VIBRATE;
+        }
+    }
+
+    @Override
+    public int getNotificationRemindType() {
         if (notificationType == TYPE_SILENT)
             return TYPE_SILENT;
         else if (notificationType == TYPE_SOUND)
@@ -343,27 +383,44 @@ public class UTPushSetting implements IPushSetting {
             return TYPE_SOUND_VIBRATE;
         }
     }
+
+
     /**
-     * diy通知类型1
-     * */
+     * 设置通知提示方式
+     *
+     * @param remindType 0、无声 1、震动 2、铃声 3、铃声震动
+     */
     @Override
-    public boolean customNofication(int remindType,int statusDrawable) {
+    public boolean customNofication(int remindType, int statusDrawable) {
+        if (remindType != 0 && remindType != 1 && remindType != 2 && remindType != 3) {
+            throw new RuntimeException("type类型错误");
+        }
         BasicCustomPushNotification notification = new BasicCustomPushNotification();
         notification.setRemindType(remindType);//设置提醒方式为声音
-        notification.setStatusBarDrawable(statusDrawable);//设置状态栏图标
+        if (statusDrawable > 0) {
+            notification.setStatusBarDrawable(statusDrawable);//设置状态栏图标
+        }
         boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(001, notification);//注册该通知,并设置ID为1
-
+        this.notificationType = remindType;
         return res;
     }
 
     /**
-     * diy通知类型2
-     * */
+     * 设置通知提示方式及自定义通知布局
+     *
+     * @param remindType 0、无声 1、震动 2、铃声 3、铃声震动
+     * @param layout 自定义布局id
+     */
     @Override
-    public boolean customNofication(int layout, int iconID, int titleID, int textID) {
-        AdvancedCustomPushNotification notification = new AdvancedCustomPushNotification(layout,iconID,titleID, textID);//创建高级自定义样式通知,设置布局文件以及对应的控件ID
+    public boolean customNofication(int layout, int iconID, int titleID, int textID, int remindType) {
+        if (layout < 0 || iconID < 0 || titleID < 0 || textID < 0) {
+            throw new RuntimeException("请填入正确资源id");
+        }
+        //创建高级自定义样式通知,设置布局文件以及对应的控件ID
+        AdvancedCustomPushNotification notification = new AdvancedCustomPushNotification(layout, iconID, titleID, textID);
         notification.setServerOptionFirst(true);//设置服务端配置优先
         notification.setBuildWhenAppInForeground(false);//设置当推送到达时如果应用处于前台不创建通知
+        notification.setRemindType(remindType);
         boolean res = CustomNotificationBuilder.getInstance().setCustomNotification(002, notification);//注册该通知,并设置ID为2
         PushServiceFactory.getCloudPushService().clearNotifications();
         return res;

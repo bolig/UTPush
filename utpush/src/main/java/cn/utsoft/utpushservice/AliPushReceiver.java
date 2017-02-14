@@ -2,12 +2,9 @@ package cn.utsoft.utpushservice;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.sdk.android.push.MessageReceiver;
 import com.alibaba.sdk.android.push.notification.CPushMessage;
-
-import java.util.Map;
 
 import cn.utsoft.utpushservice.manager.BeepManager;
 
@@ -28,11 +25,11 @@ public class AliPushReceiver extends MessageReceiver {
     @Override
     protected void onMessage(Context context, CPushMessage cPushMessage) {
         super.onMessage(context, cPushMessage);
-        BeepManager.setMsgSound(context,true);
+//        BeepManager.setMsgSound(context,true);
         String packageName = context.getPackageName();
 //        Toast.makeText(context, ""+packageName, Toast.LENGTH_SHORT).show();
 
-        BeepManager.setVibrate(context,true);
+//        BeepManager.setVibrate(context,true);
         BeepManager.getInstance(context).playBeepSoundAndVibrate();
         Log.i(TAG, "onMessage: "+packageName);
     }
