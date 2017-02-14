@@ -29,12 +29,9 @@ public class AliPushReceiver extends MessageReceiver {
     protected void onMessage(Context context, CPushMessage cPushMessage) {
         super.onMessage(context, cPushMessage);
         BeepManager.setMsgSound(context,true);
-        String packageName = context.getPackageName();
-//        Toast.makeText(context, ""+packageName, Toast.LENGTH_SHORT).show();
-
         BeepManager.setVibrate(context,true);
         BeepManager.getInstance(context).playBeepSoundAndVibrate();
-        Log.i(TAG, "onMessage: "+packageName);
+        Log.i(TAG, "onMessage: "+context.getPackageName());
     }
 
 }
