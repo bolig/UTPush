@@ -11,6 +11,11 @@ import android.widget.Toast;
 import cn.utsoft.utpushservice.ICommomCallback;
 import cn.utsoft.utpushservice.manager.UTPushManager;
 
+
+import cn.utsoft.utpushservice.ICommomCallback;
+import cn.utsoft.utpushservice.manager.UTPushManager;
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     final String info = getClass().getSimpleName();
